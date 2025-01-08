@@ -3,43 +3,78 @@ from typing import Any, Tuple, Dict
 
 
 from edg4llm.core.pipeline import DataPipeline
-from edg4llm.config import Config
+
+
+
+"""
+{
+  "instruction": "Explain the theory of relativity in simple terms.",
+  "input": "",
+  "output": "The theory of relativity, proposed by Einstein"
+}
+"""
+
 
 class Edg4LLM:
-    def __init__(self, model_type:str = "chatglm", api_key:str = None, config=None):
-        """
-        初始化统一接口。
-        :param model_type: 模型类型，例如 'openai', 'chatglm'
-        :param config: 自定义配置对象（可选）
-        """
-        self.config = config or Config()
-        self.config.update({"model_type": model_type})
-        self.pipeline = DataPipeline(self.config)
+    def __init__(self
+                , model_type: str = "chatglm"
+                , base_url: str = None
+                , api_key: str = None
+                ):
 
-    def init_model(self, model_type, api_key):
-        pass
+        self._pConfig = {
+            "model_type" : model_type
+            , "base_url": base_url
+            , "api_key" : api_key
+        }
 
+        self.pipeline = DataPipeline(self._pConfig)
 
-    def generate(self, task_type, topic=None, count=10, output_format="json"):
+    def generate(self
+                , task_type: str = 'dialogue'
+                , system_prompt: str = None
+                , user_prompt: str = None
+                , do_sample: bool = True
+                , temperature: float = 0.95
+                , top_p: float = 0.7
+                , max_tokens: int = 4095
+                , num_samples: int = 10
+                , output_format: str = "alpaca"
+                ):
         """
         生成数据的统一方法。
         :param task_type: 任务类型，例如 'question', 'answer', 'dialogue'
-        :param topic: 生成数据的主题（可选）
-        :param count: 生成数据的数量
+        :param system_prompt: 生成数据的主题（可选）
+        :param user_prompt: 生成数据的主题（可选）
+        :param num_samples: 生成数据的数量
         :param output_format: 输出数据的格式，例如 'json', 'list'
         :return: 生成的数据
         """
 
-        data = self.pipeline.generate(task_type, topic, count)
+        self._generate(task_type, system_prompt, user_prompt, do_sample, temperature, top_p, max_tokens, num_samples, output_format)
 
-        if output_format == "json":
-            import json
-            return json.dumps(data, ensure_ascii=False, indent=4)
-        elif output_format == "list":
-            return data
-        else:
-            raise ValueError(f"Unsupported output_format: {output_format}")
+    def _generate(self
+                , task_type: str = 'dialogue'
+                , system_prompt: str = None
+                , user_prompt: str = None
+                , do_sample: bool = True
+                , temperature: float = 0.95
+                , top_p: float = 0.7
+                , max_tokens: int = 4095
+                , num_samples: int = 10
+                , output_format: str = "alpaca"
+                ):
 
-    def _generate(self):
-        pass
+        self._tConfig = {
+            "task_type" : task_type
+            , "system_prompt" : system_prompt
+            , "user_prompt" : user_prompt
+            , "do_sample" : do_sample
+            , "temperature" : temperature
+            , "top_p" : top_p
+            , "max_tokens" : max_tokens
+            , "num_samples" : num_samples
+            , "output_format" : output_format
+        }
     
+        self.pipeline.generate_data(self._tConfig)

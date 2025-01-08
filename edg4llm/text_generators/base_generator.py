@@ -5,20 +5,22 @@
 
 import os
 from abc import ABC, abstractmethod
+from typing import Dict
 
-from edg4llm.config import DefaultConfig
-
+# from edg4llm.config import DefaultConfig
+from edg4llm.core.processor import DataProcessor
 class BaseGenerator(ABC):
     """
     所有生成器的基类，定义生成数据的公共接口
     """
-    def __init__(self, model_name):
+    def __init__(self, model):
         """
         初始化生成器
 
         :param model: 用于生成数据的模型接口
         """
-        self.model_name = model_name
+        self.model = model
+        self.processor = DataProcessor()
 
     @abstractmethod
     def generate(self, prompt: str) -> str:
@@ -29,3 +31,8 @@ class BaseGenerator(ABC):
         :return: 生成的文本数据
         """
         pass
+
+    def _convert_original_to_alpaca(self, system_prompt, single_data):
+        converted_data = self.processor.postprocessing(conversation_data=single_data, system_prompt=system_prompt)
+
+        return converted_data
