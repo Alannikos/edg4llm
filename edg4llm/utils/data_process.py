@@ -8,7 +8,7 @@ class DataProcessor:
     def __init__(self):
         pass
 
-    def process(self, data: str) -> dict:
+    def preprocess(self, data: str) -> dict:
         """
         处理生成的数据
         
@@ -33,12 +33,4 @@ class DataProcessor:
             result["conversation"].append(data)
 
         return result
-
-    def save_dialogue_to_jsonl(self, data):
-        """
-        这里要修改一下路径问题
-        """
-        with open('1.jsonl', 'w', encoding='utf-8') as f:
-
-            json.dump(data, f, ensure_ascii=False, indent=4)
 

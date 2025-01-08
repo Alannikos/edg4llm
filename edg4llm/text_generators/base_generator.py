@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 from typing import Dict
 
 # from edg4llm.config import DefaultConfig
-from edg4llm.core.processor import DataProcessor
+from edg4llm.utils.data_process import DataProcessor
 class BaseGenerator(ABC):
     """
     所有生成器的基类，定义生成数据的公共接口

@@ -51,7 +51,8 @@ class Edg4LLM:
         :return: 生成的数据
         """
 
-        self._generate(task_type, system_prompt, user_prompt, do_sample, temperature, top_p, max_tokens, num_samples, output_format)
+        data = self._generate(task_type, system_prompt, user_prompt, do_sample, temperature, top_p, max_tokens, num_samples, output_format)
+        return data
 
     def _generate(self
                 , task_type: str = 'dialogue'
@@ -77,4 +78,6 @@ class Edg4LLM:
             , "output_format" : output_format
         }
     
-        self.pipeline.generate_data(self._tConfig)
+        data = self.pipeline.generate_data(self._tConfig)
+
+        return data

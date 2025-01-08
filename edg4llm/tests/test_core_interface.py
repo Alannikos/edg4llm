@@ -91,12 +91,14 @@ class TestEdg4LLM(unittest.TestCase):
         num_samples = 1  # 只生成一个对话样本
         
         # 调用 generate 方法生成对话
-        self.model.generate(
+        data = self.model.generate(
             task_type="dialogue",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
             num_samples=num_samples
         )
+
+        print(data)
 
 if __name__ == '__main__':
     unittest.main()

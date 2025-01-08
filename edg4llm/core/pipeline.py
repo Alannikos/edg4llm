@@ -2,7 +2,6 @@ import os
 
 from edg4llm.utils.logger import custom_logger
 from edg4llm.core.dataGenerators import DataGenerator
-from edg4llm.core.processor import DataProcessor
 
 logger = custom_logger("DataPipeline", "INFO")
 
@@ -26,7 +25,6 @@ class DataPipeline:
         :param api_key: 用于身份验证的 API 密钥
         """
         self.data_generator = DataGenerator(pConfig)
-        self.processor = DataProcessor()  # 用于数据后处理
 
     def generate_data(self, tConfig) -> dict:
         """
@@ -45,8 +43,4 @@ class DataPipeline:
         else:
             raise ValueError("Unsupported task type")
 
-        # 对生成的数据进行后处理
-        # finished_data = self.processor.process(data)
-
-        # 将文件写入到json中
-        self.processor.save_dialogue_to_jsonl(data)
+        return data
