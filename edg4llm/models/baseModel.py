@@ -4,7 +4,7 @@ from typing import Any, Dict
 
 from edg4llm.utils.logger import custom_logger
 
-logger = custom_logger('baseModel', 'INFO')
+logger = custom_logger('baseModel')
 
 class EDGBaseModel(ABC):
     def __init__(self, api_key: str = None, base_url: str = None, model_name:str = None):

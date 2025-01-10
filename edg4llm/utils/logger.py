@@ -13,15 +13,15 @@ LOG_COLORS = {
     'RESET': '\033[0m',  # 重置颜色
 }
 
-def custom_logger(name: str, log_level: str):
+def custom_logger(name: str):
     logger = logging.getLogger(name)
-    logger.setLevel(log_level)
+    logger.setLevel(logging.INFO)
     logger.propagate = False
     logger.handlers = []
 
     # 自定义log 格式
     formatter = logging.Formatter(
-        '[%(asctime)s]-[%(name)s:%(levelname)s]-[%(process)d-%(thread)d]:%(message)s'
+        '[%(asctime)s]-[%(name)s:%(levelname)s]:%(message)s'
     )
 
     # 使用utc-时间
