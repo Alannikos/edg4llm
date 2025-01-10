@@ -48,7 +48,7 @@ class EDG4LLM:
 
     generate(task_type: str = 'dialogue', system_prompt: str = None, user_prompt: str = None, 
             do_sample: bool = True, temperature: float = 0.95, top_p: float = 0.7, 
-            max_tokens: int = 4095, num_samples: int = 10, output_format: str = "alpaca") -> list[dict]:
+            max_tokens: int = 4095, num_samples: int = 10, output_format: str = "alpaca") -> List[Dict]:
         Generates text data based on the provided configuration.
 
     Notes

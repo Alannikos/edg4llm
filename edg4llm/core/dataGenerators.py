@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Any
+from typing import Dict, List, Any
 
 from edg4llm.utils.logger import custom_logger
 from edg4llm.models.chatglm import EDGChatGLM
@@ -89,7 +89,7 @@ class DataGenerator:
         self.question_generator = QuestionGenerator(self.model)
         self.dialogue_generator = DialogueGenerator(self.model)
 
-    def generate_question(self, tConfig) -> list[Dict]:
+    def generate_question(self, tConfig) -> List[Dict]:
         """
         Generate questions based on the given configuration.
 
@@ -144,7 +144,7 @@ class DataGenerator:
         data = self.question_generator.generate(tConfig)
         return data
 
-    def generate_answer(self, tConfig) -> list[Dict]:
+    def generate_answer(self, tConfig) -> List[Dict]:
         """
         Generate answers based on the given configuration.
 
@@ -198,7 +198,7 @@ class DataGenerator:
         data = self.answer_generator.generate(tConfig)
         return data
 
-    def generate_dialogue(self, tConfig) -> list[Dict]:
+    def generate_dialogue(self, tConfig) -> List[Dict]:
         """
         Generate a dialogue based on the given configuration.
 

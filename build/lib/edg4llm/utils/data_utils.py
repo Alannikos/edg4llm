@@ -1,5 +1,6 @@
 import json
 import re
+from typing import Dict, List, Any
 
 def is_question_template_consistent(user_prompt: str) -> bool:
     """
@@ -122,7 +123,7 @@ def is_dialogue_template_consistent(user_prompt: str) -> bool:
     match = re.search(pattern, user_prompt)
     return match is not None
 
-def save_data_to_json(data: list[dict], output_path: str):
+def save_data_to_json(data: List[Dict], output_path: str):
     """
     Save a list of dictionaries to a JSON file.
 

@@ -50,13 +50,13 @@ class DataPipeline:
 
         self.data_generator = DataGenerator(pConfig)
 
-    def generate_data(self, tConfig) -> dict:
+    def generate_data(self, tConfig) -> Dict:
         """
         Generates data based on the provided configuration.
 
         Parameters
         ----------
-        tConfig : dict
+        tConfig : Dict
             Task configuration containing the following keys:
             - task_type : str
                 Specifies the type of task ('question', 'answer', or 'dialogue').

@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Any
+from typing import Dict, List, Any
 from edg4llm.utils.logger import custom_logger
 from edg4llm.generators.text_generators.base_generator import BaseGenerator
 
@@ -42,7 +42,7 @@ class QuestionGenerator(BaseGenerator):
         
         super().__init__(model)
 
-    def generate(self, tConfig: dict) -> list:
+    def generate(self, tConfig: Dict) -> List:
         """
         Generate questions based on the provided configuration.
 

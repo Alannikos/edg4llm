@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Any
+from typing import Dict, List, Any
 
 from edg4llm.utils.logger import custom_logger
 from edg4llm.generators.text_generators.base_generator import BaseGenerator
@@ -41,7 +41,7 @@ class DialogueGenerator(BaseGenerator):
         """
         super().__init__(model)
 
-    def generate(self, tConfig) -> list:
+    def generate(self, tConfig) -> List:
         """
         Generate dialogues based on the provided configuration.
 
