@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: edg4llm
+Version: 1.0.1
+Summary: A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
+Home-page: https://github.com/alannikos/edg4llm
+Author: Alannikos
+Author-email: alannikos768@outlook.com
+Keywords: LLM fine-tuning data-generation AI NLP
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.32.3
