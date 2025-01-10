@@ -6,22 +6,21 @@ from edg4llm.utils.logger import custom_logger
 from edg4llm.models.baseModel import EDGBaseModel
 from edg4llm.exceptions import HttpClientError, InvalidPromptError
 
-logger = custom_logger('chatglm')
+logger = custom_logger('chatgpt')
 
 class EDGChatGPT(EDGBaseModel):
-    def __init__(self, base_url:str = None, api_key: str = None):
+    def __init__(self, base_url:str = None, api_key: str = None, model_name: str = "gpt-4o-mini"):
         """
-        初始化 ChatGLM 模型接口
+        初始化 ChatGPT 模型接口
         :param base_url: url地址
-        :param api_key: ChatGLM 的 API 密钥
+        :param api_key: ChatGPT 的 API 密钥
         """
-        super().__init__(api_key, base_url, model_name='ChatGLM')
+        super().__init__(api_key, base_url, model_name=model_name)
 
     def execute_request(
             self
             , system_prompt: str = None
             , user_prompt: str = None
-            , model: str = "glm-4-flash"
             , do_sample: bool = True
             , temperature: float = 0.95
             , top_p: float = 0.7
@@ -31,11 +30,10 @@ class EDGChatGPT(EDGBaseModel):
         调用模型生成数据
 
         :param prompt: 提供给模型的提示文本
-        :param model: 模型的名称，默认为 "glm-4-flash"
         :return: 生成的文本
         """
 
-        response = self._execute_request(system_prompt, user_prompt, model, do_sample, temperature, top_p, max_tokens)
+        response = self._execute_request(system_prompt, user_prompt, self.model_name, do_sample, temperature, top_p, max_tokens)
         return response
 
     def send_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
@@ -44,7 +42,7 @@ class EDGChatGPT(EDGBaseModel):
 
     def _send_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
 
-        url = request.get("url", "https://open.bigmodel.cn/api/paas/v4/chat/completions")
+        url = request.get("url", "https://api.openai.com/v1/chat/completions")
         headers = {**request.get("headers", {})}
         json = request.get("json", {})
         try:
@@ -113,7 +111,7 @@ class EDGChatGPT(EDGBaseModel):
             self
             , system_prompt: str = None
             , user_prompt: str = None
-            , model: str = "glm-4-flash"
+            , model: str = "gpt-4o-mini"
             , do_sample: bool = True
             , temperature: float = 0.95
             , top_p: float = 0.7
@@ -134,7 +132,7 @@ class EDGChatGPT(EDGBaseModel):
                 "model": model,
                 "messages": [
                     {
-                        "role": "system",
+                        "role": "developer",
                         "content": system_prompt,
                     },
                     {
@@ -142,7 +140,6 @@ class EDGChatGPT(EDGBaseModel):
                         "content": user_prompt,
                     }
                 ],
-                "do_sample": do_sample,
                 "temperature": temperature,
                 "top_p": top_p,
                 "max_tokens": max_tokens

@@ -57,21 +57,25 @@ class DataGenerator:
         
         if pConfig["model_provider"] == "chatglm":
             self.model = EDGChatGLM(
+                model_name=pConfig["model_name"],
                 base_url=pConfig["base_url"],
                 api_key=pConfig["api_key"]
             )
         elif pConfig["model_provider"] == "chatgpt":
             self.model = EDGChatGPT(
+                model_name=pConfig["model_name"],
                 base_url=pConfig["base_url"],
                 api_key=pConfig["api_key"]
             )
         elif pConfig["model_provider"] == "internlm":
             self.model = EDGInternLM(
+                model_name=pConfig["model_name"],
                 base_url=pConfig["base_url"],
                 api_key=pConfig["api_key"]
             )
         elif pConfig["model_provider"] == "deepseek":
             self.model = EDGDeepSeek(
+                model_name=pConfig["model_name"],
                 base_url=pConfig["base_url"],
                 api_key=pConfig["api_key"]
             )

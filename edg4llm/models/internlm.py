@@ -6,22 +6,22 @@ from edg4llm.utils.logger import custom_logger
 from edg4llm.models.baseModel import EDGBaseModel
 from edg4llm.exceptions import HttpClientError, InvalidPromptError
 
-logger = custom_logger('chatglm')
+logger = custom_logger('internlm')
 
 class EDGInternLM(EDGBaseModel):
-    def __init__(self, base_url:str = None, api_key: str = None):
+    def __init__(self, base_url:str = None, api_key: str = None, model_name: str = "internlm2.5-latest"):
         """
-        初始化 ChatGLM 模型接口
+        初始化 InternLM 模型接口
         :param base_url: url地址
-        :param api_key: ChatGLM 的 API 密钥
+        :param api_key: InternLM 的 API 密钥
         """
-        super().__init__(api_key, base_url, model_name='ChatGLM')
+        super().__init__(api_key, base_url, model_name=model_name)
 
     def execute_request(
             self
             , system_prompt: str = None
             , user_prompt: str = None
-            , model: str = "glm-4-flash"
+            , model: str = "internlm2.5-latest"
             , do_sample: bool = True
             , temperature: float = 0.95
             , top_p: float = 0.7
@@ -31,7 +31,7 @@ class EDGInternLM(EDGBaseModel):
         调用模型生成数据
 
         :param prompt: 提供给模型的提示文本
-        :param model: 模型的名称，默认为 "glm-4-flash"
+        :param model: 模型的名称，默认为 "internlm2.5-latest"
         :return: 生成的文本
         """
 
@@ -44,7 +44,7 @@ class EDGInternLM(EDGBaseModel):
 
     def _send_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
 
-        url = request.get("url", "https://open.bigmodel.cn/api/paas/v4/chat/completions")
+        url = request.get("url", "https://internlm-chat.intern-ai.org.cn/puyu/api/v1/chat/completions")
         headers = {**request.get("headers", {})}
         json = request.get("json", {})
         try:
@@ -142,7 +142,6 @@ class EDGInternLM(EDGBaseModel):
                         "content": user_prompt,
                     }
                 ],
-                "do_sample": do_sample,
                 "temperature": temperature,
                 "top_p": top_p,
                 "max_tokens": max_tokens

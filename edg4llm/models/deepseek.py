@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union, cast
 
@@ -6,22 +7,21 @@ from edg4llm.utils.logger import custom_logger
 from edg4llm.models.baseModel import EDGBaseModel
 from edg4llm.exceptions import HttpClientError, InvalidPromptError
 
-logger = custom_logger('chatglm')
+logger = custom_logger('deepseek')
 
 class EDGDeepSeek(EDGBaseModel):
-    def __init__(self, base_url:str = None, api_key: str = None):
+    def __init__(self, base_url:str = None, api_key: str = None, model_name: str = "deepseek-chat"):
         """
-        初始化 ChatGLM 模型接口
+        初始化 DeepSeek 模型接口
         :param base_url: url地址
-        :param api_key: ChatGLM 的 API 密钥
+        :param api_key: DeepSeek 的 API 密钥
         """
-        super().__init__(api_key, base_url, model_name='ChatGLM')
+        super().__init__(api_key=api_key, base_url=base_url, model_name = model_name)
 
     def execute_request(
             self
             , system_prompt: str = None
             , user_prompt: str = None
-            , model: str = "glm-4-flash"
             , do_sample: bool = True
             , temperature: float = 0.95
             , top_p: float = 0.7
@@ -31,11 +31,11 @@ class EDGDeepSeek(EDGBaseModel):
         调用模型生成数据
 
         :param prompt: 提供给模型的提示文本
-        :param model: 模型的名称，默认为 "glm-4-flash"
+        :param model: 模型的名称，默认为 "deepseek-chat"
         :return: 生成的文本
         """
 
-        response = self._execute_request(system_prompt, user_prompt, model, do_sample, temperature, top_p, max_tokens)
+        response = self._execute_request(system_prompt, user_prompt, self.model_name, do_sample, temperature, top_p, max_tokens)
         return response
 
     def send_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
@@ -44,17 +44,22 @@ class EDGDeepSeek(EDGBaseModel):
 
     def _send_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
 
-        url = request.get("url", "https://open.bigmodel.cn/api/paas/v4/chat/completions")
+        url = request.get("url", "https://api.deepseek.com/chat/completions")
         headers = {**request.get("headers", {})}
-        json = request.get("json", {})
+        data = request.get("data", {})
+
+        if isinstance(data, dict):
+            data = json.dumps(data)
+
         try:
-            response = requests.post(
+            response = requests.request(
+                "POST",
                 url=url,
                 headers=headers,
-                json=json,
-                timeout=30,
+                data=data,
+                # timeout=30,
             )
-    
+
             response.raise_for_status()
             return response.json()
 
@@ -67,6 +72,7 @@ class EDGDeepSeek(EDGBaseModel):
                 url,
                 e,
             )
+
             raise HttpClientError(
                 f"HTTP error occurred. Status Code: {status_code}, Message: {e}",
                 status_code=status_code,
@@ -113,41 +119,45 @@ class EDGDeepSeek(EDGBaseModel):
             self
             , system_prompt: str = None
             , user_prompt: str = None
-            , model: str = "glm-4-flash"
+            , model: str = "deepseek-chat"
             , do_sample: bool = True
             , temperature: float = 0.95
             , top_p: float = 0.7
-            , max_tokens: int = 4095
+            , max_tokens: int = 2047
             ) -> str:
-        
+
         if (system_prompt is None and user_prompt is None):
             logger.error("prompt不能同时为空")
             raise InvalidPromptError("prompt不能同时为空")
 
         request_data = {
-            "url": f"{self.base_url}",
-            "headers": {
-                "Authorization": f"Bearer {self.api_key}",
-                "Content-Type": "application/json",
-            },
-            "json": {
-                "model": model,
+            "url": self.base_url,
+            "data": {
                 "messages": [
-                    {
-                        "role": "system",
-                        "content": system_prompt,
-                    },
-                    {
-                        "role": "user",
-                        "content": user_prompt,
-                    }
+                    {"content": system_prompt, "role": "system"},
+                    {"content": user_prompt, "role": "user"}
                 ],
-                "do_sample": do_sample,
+                "model": model,
+                "frequency_penalty": 0,
+                "max_tokens": max_tokens,
+                "presence_penalty": 0,
+                "response_format": {"type": "text"},
+                "stop": None,
+                "stream": False,
+                "stream_options": None,
                 "temperature": temperature,
                 "top_p": top_p,
-                "max_tokens": max_tokens
+                "tools": None,
+                "tool_choice": "none",
+                "logprobs": False,
+                "top_logprobs": None
             },
+            "headers": {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': f'Bearer {self.api_key}'
+            }
         }
 
-        response = self.send_request(request_data)
+        response = self._send_request(request_data)
         return response["choices"][0]["message"]["content"].strip()

@@ -24,7 +24,7 @@ class EDGChatGLM(EDGBaseModel):
         The API key for authenticating with the ChatGLM API. If not provided, defaults to None.
     """
 
-    def __init__(self, base_url: str = None, api_key: str = None):
+    def __init__(self, base_url: str = None, api_key: str = None, model_name: str = 'glm-4-flash'):
         """
         Initialize the ChatGLM model interface.
 
@@ -38,18 +38,18 @@ class EDGChatGLM(EDGBaseModel):
             The base URL for the ChatGLM API. Default is None.
         api_key : str, optional
             The API key for authenticating with the ChatGLM API. Default is None.
-
+        model_name: str, optional
+            The specific model to use within the selected provider. Default is "glm-4-flash".
         Notes
         -----
         The base URL and API key are required for successful communication with the ChatGLM API.
         """
-        super().__init__(api_key, base_url, model_name='ChatGLM')
+        super().__init__(api_key, base_url, model_name=model_name)
 
     def execute_request(
             self,
             system_prompt: str = None,
             user_prompt: str = None,
-            model: str = "glm-4-flash",
             do_sample: bool = True,
             temperature: float = 0.95,
             top_p: float = 0.7,
@@ -68,8 +68,6 @@ class EDGChatGLM(EDGBaseModel):
             The system-level prompt that sets the context for the conversation. Default is None.
         user_prompt : str, optional
             The user-provided prompt that initiates the conversation. Default is None.
-        model : str, optional
-            The model to use for generation. Default is "glm-4-flash".
         do_sample : bool, optional
             Whether to use sampling during text generation. Default is True.
         temperature : float, optional
@@ -89,7 +87,7 @@ class EDGChatGLM(EDGBaseModel):
         InvalidPromptError
             If both the system and user prompts are None.
         """
-        response = self._execute_request(system_prompt, user_prompt, model, do_sample, temperature, top_p, max_tokens)
+        response = self._execute_request(system_prompt, user_prompt, self.model_name, do_sample, temperature, top_p, max_tokens)
         return response
 
     def send_request(self, request: Dict[str, Any]) -> Dict[str, Any]:

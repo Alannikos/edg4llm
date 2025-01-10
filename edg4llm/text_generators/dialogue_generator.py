@@ -88,7 +88,6 @@ class DialogueGenerator(BaseGenerator):
         # Extract configuration parameters
         system_prompt = tConfig.get("system_prompt", "")
         user_prompt = tConfig.get("user_prompt", "")
-        model = tConfig.get("model", "glm-4-flash")
         do_sample = tConfig.get("do_sample", True)
         temperature = tConfig.get("temperature", 0.95)
         top_p = tConfig.get("top_p", 0.7)
@@ -105,7 +104,6 @@ class DialogueGenerator(BaseGenerator):
                 generated_dialogue = self.model.execute_request(
                     system_prompt=system_prompt,
                     user_prompt=user_prompt,
-                    model=model,
                     do_sample=do_sample,
                     temperature=temperature,
                     top_p=top_p,
