@@ -71,7 +71,6 @@ class DataPipeline:
         ------
         ValueError
             If the provided task type is unsupported.
-
         """
         if tConfig["task_type"] == "question":
             logger.info("Generated data for task_type: 'question'")

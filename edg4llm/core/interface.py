@@ -105,6 +105,7 @@ class EDG4LLM:
         logger.info("DataPipeline initialized successfully with the provided configuration.")
 
     def generate(self
+                , language: str = 'zh'
                 , task_type: str = 'dialogue'
                 , system_prompt: str = None
                 , user_prompt: str = None
@@ -114,12 +115,17 @@ class EDG4LLM:
                 , max_tokens: int = 4095
                 , num_samples: int = 10
                 , output_format: str = "alpaca"
+                , question_path: str = None
                 ):
         """
         Generate text data based on the specified configuration.
 
         Parameters
         ----------
+        language : str, optional
+            The language of data in data generation. Must be one of 'zh', 'en'. 
+            Default is 'zh'.
+
         task_type : str, optional
             The type of task for data generation. Must be one of 'question', 'answer', or 'dialogue'. 
             Default is 'dialogue'.
@@ -165,6 +171,13 @@ class EDG4LLM:
         output_format : str, optional
             The format of the output. 
             Default is "alpaca".
+
+        question_path : str, optional
+            The path to a file containing a list of questions.
+            - Only applicable when `task_type` is set to 'answer'.
+            - The model will read the file and generate answers for each question in the file.
+            - The output will be returned in a specific format as defined by the `output_format` parameter.
+            Default is None.
 
         Returns
         -------
@@ -193,12 +206,13 @@ class EDG4LLM:
         based on the provided configuration.
         """
 
-        data = self._generate(task_type, system_prompt, user_prompt, do_sample, temperature, top_p, max_tokens, num_samples, output_format)
+        data = self._generate(language, task_type, system_prompt, user_prompt, do_sample, temperature, top_p, max_tokens, num_samples, output_format, question_path)
         logger.info("Data generation completed successfully for task_type: %s", task_type)
         
         return data
 
     def _generate(self,
+                language: str = 'zh',
                 task_type: str = 'dialogue',
                 system_prompt: str = None,
                 user_prompt: str = None,
@@ -207,12 +221,18 @@ class EDG4LLM:
                 top_p: float = 0.7,
                 max_tokens: int = 4095,
                 num_samples: int = 10,
-                output_format: str = "alpaca"):
+                output_format: str = "alpaca",
+                question_path: str = None
+                ):
         """
         Generate text data based on the specified configuration.
 
         Parameters
         ----------
+        language : str, optional
+            The language of data in data generation. Must be one of 'zh', 'en'. 
+            Default is 'zh'.
+
         task_type : str, optional
             The type of task for data generation. Must be one of 'question', 'answer', or 'dialogue'. 
             Default is 'dialogue'.
@@ -259,6 +279,13 @@ class EDG4LLM:
             The format of the output. 
             Default is "alpaca".
 
+        question_path : str, optional
+            The path to a file containing a list of questions.
+            - Only applicable when `task_type` is set to 'answer'.
+            - The model will read the file and generate answers for each question in the file.
+            - The output will be returned in a specific format as defined by the `output_format` parameter.
+            Default is None.
+  
         Returns
         -------
         list of dict
@@ -287,6 +314,7 @@ class EDG4LLM:
         """
 
         self._tConfig = {
+            "language": language,
             "task_type": task_type,         # The type of task for data generation
             "system_prompt": system_prompt, # The system-level prompt
             "user_prompt": user_prompt,     # The user-provided prompt
@@ -295,9 +323,10 @@ class EDG4LLM:
             "top_p": top_p,                 # Nucleus sampling parameter
             "max_tokens": max_tokens,       # Maximum tokens in the output
             "num_samples": num_samples,     # Number of output samples
-            "output_format": output_format  # Desired output format
+            "output_format": output_format,  # Desired output format
+            "question_path": question_path
         }
-        
+
         # Call the pipeline's generate_data method using the configuration dictionary
         data = self.pipeline.generate_data(self._tConfig)
 

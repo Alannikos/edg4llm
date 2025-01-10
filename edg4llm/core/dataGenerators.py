@@ -6,9 +6,11 @@ from edg4llm.models.chatglm import EDGChatGLM
 from edg4llm.models.chatgpt import EDGChatGPT
 from edg4llm.models.internlm import EDGInternLM
 from edg4llm.models.deepseek import EDGDeepSeek
-from edg4llm.text_generators.answer_generator import AnswerGenerator
-from edg4llm.text_generators.question_generator import QuestionGenerator
-from edg4llm.text_generators.dialogue_generator import DialogueGenerator
+from edg4llm.generators.text_generators.answer_generator import AnswerGenerator
+from edg4llm.generators.text_generators.question_generator import QuestionGenerator
+from edg4llm.generators.text_generators.dialogue_generator import DialogueGenerator
+
+from edg4llm.processor.preprocess import PreProcessor
 
 logger = custom_logger("dataGenerator")
 
@@ -82,28 +84,119 @@ class DataGenerator:
         else:
             raise ValueError("Unsupported model provider")
 
+        self.preprocessor = PreProcessor()
         self.answer_generator = AnswerGenerator(self.model)
         self.question_generator = QuestionGenerator(self.model)
         self.dialogue_generator = DialogueGenerator(self.model)
 
-
-    def generate_question(self, prompt: str) -> str:
+    def generate_question(self, tConfig) -> list[Dict]:
         """
-        生成问题数据
+        Generate questions based on the given configuration.
 
-        :param prompt: 用于生成问题的提示文本
-        :return: 生成的问题
-        """
-        pass
+        This method uses the `question_generator` to generate question data based on
+        the provided configuration options. It supports various parameters to control
+        the question generation process, such as task type, prompts, sampling strategies, and output formatting.
 
-    def generate_answer(self, question: str) -> str:
+        Parameters
+        ----------
+        tConfig : dict
+            A configuration dictionary containing the following key-value pairs:
+            - "language" : str, optional
+                The language of data in data generation. Must be one of 'zh', 'en'. 
+                Default is 'zh'.
+            - "task_type" : str, optional
+                The type of task for data generation. Must be 'question' to ensure valid output.
+                Default is 'question'.
+            - "system_prompt" : str, optional
+                A system-level prompt to guide the question generation. Default is None.
+            - "user_prompt" : str, optional
+                A user-provided prompt to initiate the question generation. Default is None.
+            - "do_sample" : bool, optional
+                Whether to use sampling during question generation. If True, enables sampling strategies like 
+                temperature and top_p. If False, uses deterministic decoding. Default is True.
+            - "temperature" : float, optional
+                Sampling temperature to control randomness. Must be in the range [0.0, 1.0]. 
+                Default is 0.95.
+            - "top_p" : float, optional
+                Nucleus sampling parameter for controlling randomness. Must be in the range [0.0, 1.0]. Default is 0.7.
+            - "max_tokens" : int, optional
+                The maximum number of tokens to generate in the question output. Default is 4095.
+            - "num_samples" : int, optional
+                The number of question samples to generate. Default is 10.
+            - "output_format" : str, optional
+                The format of the output, such as "alpaca" or other formats. Default is "alpaca".
+
+        Returns
+        -------
+        list of dict
+            A list of dictionaries containing the generated question outputs.
+
+        Notes
+        -----
+        - This method uses the `generate` method from the `question_generator` to produce question data
+          based on the provided configuration.
+        - The `tConfig` dictionary allows for flexible question generation based on task type, 
+          system/user prompts, and various sampling strategies.
         """
-        生成答案数据
+
+        tConfig["user_prompt"] = self.preprocessor.question_preprocess(tConfig["language"], tConfig["user_prompt"])
         
-        :param question: 用于生成答案的问题
-        :return: 生成的答案
+        data = self.question_generator.generate(tConfig)
+        return data
+
+    def generate_answer(self, tConfig) -> list[Dict]:
         """
-        pass
+        Generate answers based on the given configuration.
+
+        This method uses the `answer_generator` to generate answer data based on
+        the provided configuration options. It supports various parameters to control
+        the answer generation process, such as task type, prompts, sampling strategies, and output formatting.
+
+        Parameters
+        ----------
+        tConfig : dict
+            A configuration dictionary containing the following key-value pairs:
+            - "language" : str, optional
+                The language of data in data generation. Must be one of 'zh', 'en'. 
+                Default is 'zh'.
+            - "task_type" : str, optional
+                The type of task for data generation. Must be 'answer' to ensure valid output.
+                Default is 'answer'.
+            - "system_prompt" : str, optional
+                A system-level prompt to guide the answer generation. Default is None.
+            - "user_prompt" : str, optional
+                A user-provided prompt to initiate the answer generation. Default is None.
+            - "do_sample" : bool, optional
+                Whether to use sampling during answer generation. If True, enables sampling strategies like 
+                temperature and top_p. If False, uses deterministic decoding. Default is True.
+            - "temperature" : float, optional
+                Sampling temperature to control randomness. Must be in the range [0.0, 1.0]. 
+                Default is 0.95.
+            - "top_p" : float, optional
+                Nucleus sampling parameter for controlling randomness. Must be in the range [0.0, 1.0]. Default is 0.7.
+            - "max_tokens" : int, optional
+                The maximum number of tokens to generate in the answer output. Default is 4095.
+            - "num_samples" : int, optional
+                The number of answer samples to generate. Default is 10.
+            - "output_format" : str, optional
+                The format of the output, such as "json" or other formats. Default is "json".
+
+        Returns
+        -------
+        list of dict
+            A list of dictionaries containing the generated answer outputs.
+
+        Notes
+        -----
+        - This method uses the `generate` method from the `answer_generator` to produce answer data
+        based on the provided configuration.
+        - The `tConfig` dictionary allows for flexible answer generation based on task type, 
+        system/user prompts, and various sampling strategies.
+        """
+
+        tConfig["user_prompt"] = self.preprocessor.answer_preprocess(tConfig["language"], tConfig["user_prompt"])
+        data = self.answer_generator.generate(tConfig)
+        return data
 
     def generate_dialogue(self, tConfig) -> list[Dict]:
         """
@@ -117,6 +210,9 @@ class DataGenerator:
         ----------
         tConfig : dict
             A configuration dictionary containing the following key-value pairs:
+            - "language" : str, optional
+                The language of data in data generation. Must be one of 'zh', 'en'. 
+                Default is 'zh'.
             - "task_type" : str, optional
                 The type of task for data generation. Must be one of 'question', 'answer', or 'dialogue'. 
                 Default is 'dialogue'.
@@ -152,5 +248,6 @@ class DataGenerator:
           and various sampling strategies.
         """
 
+        tConfig["user_prompt"] = self.preprocessor.dialogue_preprocess(tConfig["language"], tConfig["user_prompt"])
         data = self.dialogue_generator.generate(tConfig)
         return data

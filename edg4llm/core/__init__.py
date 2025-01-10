@@ -1,1 +1,1 @@
-from .interface import EDG4LLM
+from edg4llm.core.interface import EDG4LLM

@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union, ca
 
 from edg4llm.utils.logger import custom_logger
 from edg4llm.models.baseModel import EDGBaseModel
-from edg4llm.exceptions import HttpClientError, InvalidPromptError
+from edg4llm.utils.exceptions import HttpClientError, InvalidPromptError
 
 logger = custom_logger('chatglm')
 
@@ -148,7 +148,7 @@ class EDGChatGLM(EDGBaseModel):
                 timeout=30,
             )
             response.raise_for_status()
-            return response.json()
+            return response.json()["choices"][0]["message"]["content"].strip()
 
         except requests.exceptions.HTTPError as e:
             # Handle HTTP error exceptions
@@ -159,47 +159,45 @@ class EDGChatGLM(EDGBaseModel):
                 url,
                 e,
             )
-            raise HttpClientError(
-                f"HTTP error occurred. Status Code: {status_code}, Message: {e}",
-                status_code=status_code,
-            ) from e
+
+            return {"error": "HTTP error", "status_code": status_code, "message": str(e)}
+
 
         except requests.exceptions.ConnectionError as e:
             # Handle connection errors
             logger.error("Connection error occurred while connecting to %s: %s", url, e)
-            raise HttpClientError(
-                f"Connection error occurred while connecting to {url}: {e}"
-            ) from e
+            
+            return {"error": "Connection error", "message": str(e)}
 
         except requests.exceptions.Timeout as e:
             # Handle timeout errors
             logger.error("Timeout occurred while sending request to %s: %s", url, e)
-            raise HttpClientError(
-                f"Request timed out while connecting to {url}: {e}"
-            ) from e
+
+            return {"error": "Timeout", "message": str(e)}
+
 
         except requests.exceptions.RequestException as e:
             # Handle any generic request exceptions
             logger.error(
                 "Request exception occurred while sending request to %s: %s", url, e
             )
-            raise HttpClientError(
-                f"An unexpected error occurred while making the request to {url}: {e}"
-            ) from e
+
+            return {"error": "Request exception", "message": str(e)}
+
 
         except ValueError as e:
             # Handle JSON decoding errors
             logger.error("JSON decoding error occurred: %s", e)
-            raise HttpClientError(f"JSON decoding error occurred: {e}") from e
+
+            return {"error": "JSON decoding error", "message": str(e)}
 
         except Exception as e:
             # Catch any unexpected errors
             logger.critical(
                 "An unexpected error occurred while sending request to %s: %s", url, e
             )
-            raise HttpClientError(
-                f"An unexpected error occurred while sending request to {url}: {e}"
-            ) from e
+
+            return {"error": "Unexpected error", "message": str(e)}
 
     def _execute_request(
             self,
@@ -271,4 +269,5 @@ class EDGChatGLM(EDGBaseModel):
         }
 
         response = self.send_request(request_data)
-        return response["choices"][0]["message"]["content"].strip()
+
+        return response

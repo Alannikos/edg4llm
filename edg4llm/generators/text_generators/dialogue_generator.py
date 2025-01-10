@@ -2,7 +2,7 @@ import os
 from typing import Dict, Any
 
 from edg4llm.utils.logger import custom_logger
-from edg4llm.text_generators.base_generator import BaseGenerator
+from edg4llm.generators.text_generators.base_generator import BaseGenerator
 
 logger = custom_logger("DialogueGenerator")
 
@@ -99,8 +99,14 @@ class DialogueGenerator(BaseGenerator):
 
         # Generate dialogues for the specified number of samples
         total_samples = num_samples  # Total number of samples to generate
+        logger.info("Starting the data generation process.")
         for _idx in range(1, num_samples + 1):
+            retry_count = 0  # 初始化重试计数
+            max_retries = 5  # 设置最大重试次数（根据需要调整）
+
             while True:  # Keep trying until valid dialogue data is generated
+                retry_count += 1
+
                 generated_dialogue = self.model.execute_request(
                     system_prompt=system_prompt,
                     user_prompt=user_prompt,
@@ -110,6 +116,22 @@ class DialogueGenerator(BaseGenerator):
                     max_tokens=max_tokens,
                 )
 
+                if "error" in generated_dialogue:
+                    logger.warning(
+                        "Sample %d: Request failed with error: %s. Retrying (%d/%d)...",
+                        _idx,
+                        generated_dialogue["error"],
+                        retry_count,
+                        max_retries,
+                    )
+                    
+                    if retry_count >= max_retries:
+                        logger.error("Sample %d: Max retries reached. Skipping this sample.", _idx)
+                        break  # 跳出当前样本，进入下一个
+
+                    continue  # 继续当前样本的生成
+
+
                 # Convert the generated dialogue to the desired format (e.g., Alpaca format)
                 converted_generated_dialogue = self._convert_original_to_alpaca(system_prompt, generated_dialogue)
 
@@ -118,7 +140,17 @@ class DialogueGenerator(BaseGenerator):
                     dialogues.append(converted_generated_dialogue)
                     break
                 else:
-                    logger.warning("Generated dialogue for sample %d is None. Retrying...", _idx)
+                    logger.warning(
+                        "Sample %d: Generated dialogue is None. Retrying (%d/%d)...",
+                        _idx,
+                        retry_count,
+                        max_retries,
+                    )
+                    
+                    if retry_count >= max_retries:
+                        logger.error("Sample %d: Max retries reached. Skipping this sample.", _idx)
+                        break  # 跳出当前样本
+
 
             # Log the progress of dialogue generation
             progress = (_idx / total_samples) * 100
