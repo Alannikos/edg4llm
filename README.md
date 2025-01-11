@@ -43,14 +43,15 @@ Easy Data Generation For Large Language Model, A unified tool to generate fine-t
 - [License](#license)
 - [Future Development Plans](#future-development-plans)
 - [Acknowledgments](#acknowledgments)
-- [Disclaimer](#disclaimer)
+- [License](#disclaimer)
+- [Star History](#star-history)
 
 ## Latest News
 
 <details open>
 <summary><b>2025</b></summary>
 
-- [2025/01/11] 👋👋 
+- [2025/01/11] 👋👋 We are excited to announce [**the initial release of edg4llm v1.0.12**](https://pypi.org/project/edg4llm/1.0.12/), marking the completion of its core functionalities. 
 
 </details>
 
@@ -70,23 +71,42 @@ $\quad$ With edg4llm, users can easily produce diverse datasets tailored to fine
 Compatibility: Seamlessly integrates with mainstream large language models and is suitable for various development scenarios.
 
 ## Installation
+To install **edg4llm**, simply run the following command in your terminal:
+
 
 ```bash
 pip install edg4llm
 ```
 
 ### Supported Python Versions
-- Python >= 3.8
+- **Supported Python Versions**: Python 3.8 or higher is required for compatibility with this library. Ensure your environment meets this version requirement.
 
 ### LLM Provider
+The current version of edg4llm supports the following large language model providers:
 
-- ChatGLM
-- DeepSeek
-- OpenAI ChatGPT
-- InternLM
+- **ChatGLM**: A versatile LLM optimized for various text generation tasks.
+- **DeepSeek**: A powerful and efficient LLM for fine-tuned applications.
+- **OpenAI ChatGPT**: The widely-used conversational AI from OpenAI.
+- **InternLM**: A robust LLM tailored for enterprise and advanced use cases.
+
+More providers will be added in future updates to extend compatibility and functionality. 
+
 
 ## Quick Start
 
+To get started with **edg4llm**, follow the steps below. This example demonstrates how to use the library to generate dialogue data based on a specific prompt.
+
+### Prerequisites
+
+1. Install the **edg4llm** package:
+```bash
+   pip install edg4llm
+```
+
+2. Ensure you have Python version 3.8 or higher.
+3. Obtain the necessary API key and base URL for your chosen model provider (e.g., ChatGLM).
+
+### Code Example
 ```python
 import edg4llm
 print(edg4llm.__version__)
@@ -123,18 +143,43 @@ data_dialogue = edg.generate(
 )
 ```
 
+### Explanation
+
+1. Importing the Library: Import the edg4llm library and verify the version using print(edg4llm.__version__).
+
+2. Initialization: Use EDG4LLM to initialize the library with the appropriate model provider, model name, base URL, and API key.
+
+3. Prompts:
+    - system_prompt defines the behavior or role of the assistant.
+    - user_prompt provides specific instructions for generating data.
+4. Data Generation:
+Use the generate method with the following parameters:
+    - task_type: Defines the type of task (e.g., dialogue, question-answering).
+    - system_prompt and user_prompt: Provide context and task-specific instructions.
+    - num_samples: Specifies how many samples to generate.
+5. Output: The generated data is returned as a JSON object in the specified format.
+
 ## Requirements
+
+- Only require requests
 
 ## License
 MIT License - See [LICENSE](LICENSE) for details.
 
 ## Future Development Plans
+1. - [ ] Recording Introduction Video
+2. - [ ] Support Gemini2
+3. - [ ] Support local large language models
+4. - [ ] Support other types of data, such as picture.
 
 ## Acknowledgments
+| Project | Description |
+|---|---|
+| [InternLM](https://github.com/InternLM/InternLM) | A series of advanced open-source large language models |
+| [FunGPT](https://github.com/Alannikos/FunGPT) | An open-source Role-Play project |
 
-## Disclaimer
-
-
+## License
+MIT License - See [LICENSE](LICENSE) for details.
 
 ## Star History
 
