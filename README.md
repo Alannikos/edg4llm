@@ -1,5 +1,10 @@
 # EDG4LLM
+
+<div align="center">
+
 ![welcome](assets/welcome.png)
+
+</div>
 
 <div align="center">
 
