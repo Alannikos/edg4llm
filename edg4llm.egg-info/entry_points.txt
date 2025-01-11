@@ -1,2 +1,0 @@
-[console_scripts]
-edg4llm-welcome = edg4llm.post_install:display_ascii_art

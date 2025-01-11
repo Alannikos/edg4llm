@@ -2,11 +2,9 @@ LICENSE
 README.md
 setup.py
 edg4llm/__init__.py
-edg4llm/post_install.py
 edg4llm.egg-info/PKG-INFO
 edg4llm.egg-info/SOURCES.txt
 edg4llm.egg-info/dependency_links.txt
-edg4llm.egg-info/entry_points.txt
 edg4llm.egg-info/not-zip-safe
 edg4llm.egg-info/requires.txt
 edg4llm.egg-info/top_level.txt
