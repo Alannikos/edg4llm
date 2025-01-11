@@ -218,9 +218,12 @@ data_dialogue = edg.generate(
 3. Prompts:
     - system_prompt defines the behavior or role of the assistant.
     - user_prompt provides specific instructions for generating data.
-4. Data Generation:
-Use the generate method with the following parameters:
-    - task_type: Defines the type of task (e.g., dialogue, question-answering).
+4. Data Generation: Use the generate method with the following parameters:
+    - task_type: Defines the type of task.
+        - dialogue: generate the question-answer pairs according to the prompt.
+        - question: generate the question data according to the prompt.
+        - answer: generate the answer data according to the questions and the prompt.
+        
     - system_prompt and user_prompt: Provide context and task-specific instructions.
     - num_samples: Specifies how many samples to generate.
 5. Output: The generated data is returned as a JSON object in the specified format.
