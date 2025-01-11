@@ -4,13 +4,6 @@
 
 ![welcome](assets/welcome.png)
 
-```
-      __      __  __        __   ___  __     __  __   __                     
-|  | |_  |   /   /  \ |\/| |_     |  /  \   |_  |  \ / _   |__| |   |   |\/| 
-|/\| |__ |__ \__ \__/ |  | |__    |  \__/   |__ |__/ \__)     | |__ |__ |  | 
-                                                                             
-```
-
 </div>
 
 <div align="center">
@@ -37,7 +30,7 @@
 
 
 
-A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
+Easy Data Generation For Large Language Model, A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
 
 
 ## Table of Contents
