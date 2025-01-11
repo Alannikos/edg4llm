@@ -34,18 +34,40 @@ Easy Data Generation For Large Language Model, A unified tool to generate fine-t
 
 
 ## Table of Contents
+- [Latest News](#latest-news)
+- [Introduction](#introduction)
 - [Features](#features)
 - [Installation](#installation)
-- [Library Scope](#library-scope)
 - [Quick Start](#quick-start)
 - [Requirements](#requirements)
-- [Development Setup](#development-setup)
-- [Testing](#testing)
 - [License](#license)
-- [Security](#security)
+- [Future Development Plans](#future-development-plans)
+- [Acknowledgments](#acknowledgments)
+- [Disclaimer](#disclaimer)
 
+## Latest News
+
+<details open>
+<summary><b>2025</b></summary>
+
+- [2025/01/11] 👋👋 
+
+</details>
+
+## Introduction
+$\quad$ edg4llm is a Python library designed specifically for generating fine-tuning data using large language models. This tool aims to assist users in creating high-quality training datasets efficiently. At its current stage, it mainly supports text data generation. The generated data includes, but is not limited to:
+- **Question data**
+- **Answer data**
+- **Dialogue data**
+
+$\quad$ With edg4llm, users can easily produce diverse datasets tailored to fine-tuning requirements, significantly enhancing the performance of large language models in specific tasks.
 ## Features
 
+1. **Simple to Use**: Provides a straightforward interface that allows users to get started without complex configurations.
+2. **Lightweight**: Minimal dependencies and low resource consumption make it efficient and easy to use.
+3. **High Efficiency**: Utilizes an optimized generation mechanism to quickly produce large volumes of high-quality fine-tuning data.
+4. **Flexibility**: Supports a variety of data formats and generation options, allowing customization to meet specific needs.
+Compatibility: Seamlessly integrates with mainstream large language models and is suitable for various development scenarios.
 
 ## Installation
 
@@ -56,33 +78,58 @@ pip install edg4llm
 ### Supported Python Versions
 - Python >= 3.8
 
-### LLM Provider Dependencies
+### LLM Provider
 
-
-## Library Scope
-
-
-### OpenAPI Specification Validation
-
+- ChatGLM
+- DeepSeek
+- OpenAI ChatGPT
+- InternLM
 
 ## Quick Start
 
+```python
+import edg4llm
+print(edg4llm.__version__)
+
+from edg4llm import EDG4LLM
+
+api_key = "xxx"
+base_url = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
+
+edg = EDG4LLM(model_provider='chatglm', model_name="glm-4-flash", base_url=base_url, api_key=api_key)
+# 设置测试数据
+system_prompt = """你是一个精通中国古代诗词的古文学大师"""
+
+user_prompt = """
+    目标: 1. 请生成过年为场景的连续多轮对话记录
+            2. 提出的问题要多样化。
+            3. 要符合人类的说话习惯。
+            4. 严格遵循规则: 请以如下格式返回生成的数据, 只返回JSON格式，json模板:  
+                [
+                    {{
+                        "input":"AAA","output":"BBB" 
+                    }}
+                ]
+                其中input字段表示一个人的话语, output字段表示专家的话语
+"""
+num_samples = 1  # 只生成一个对话样本
+
+# 调用 generate 方法生成对话
+data_dialogue = edg.generate(
+    task_type="dialogue",
+    system_prompt=system_prompt,
+    user_prompt=user_prompt,
+    num_samples=num_samples
+)
+```
 
 ## Requirements
 
-
-## Development Setup
-
-## Testing
-
-# Integration tests
-
-
 ## License
-
 MIT License - See [LICENSE](LICENSE) for details.
 
-## Security
+## Future Development Plans
 
-## Author
-Alannikos (alannikos768@outlook.com)
+## Acknowledgments
+
+## Disclaimer
