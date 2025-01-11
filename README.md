@@ -32,6 +32,15 @@
 Easy Data Generation For Large Language Model(abbreviated as  EDG4LLM), A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
 
 
+## Latest News
+
+<details open>
+<summary><b>2025</b></summary>
+
+- [2025/01/11] 👋👋 We are excited to announce [**the initial release of edg4llm v1.0.12**](https://pypi.org/project/edg4llm/1.0.12/), marking the completion of its core functionalities. 
+
+</details>
+
 ## Table of Contents
 - [Latest News](#latest-news)
 - [Introduction](#introduction)
@@ -44,15 +53,6 @@ Easy Data Generation For Large Language Model(abbreviated as  EDG4LLM), A unifie
 - [Acknowledgments](#acknowledgments)
 - [License](#disclaimer)
 - [Star History](#star-history)
-
-## Latest News
-
-<details open>
-<summary><b>2025</b></summary>
-
-- [2025/01/11] 👋👋 We are excited to announce [**the initial release of edg4llm v1.0.12**](https://pypi.org/project/edg4llm/1.0.12/), marking the completion of its core functionalities. 
-
-</details>
 
 ## Introduction
 edg4llm is a Python library designed specifically for generating fine-tuning data using large language models. This tool aims to assist users in creating high-quality training datasets efficiently. At its current stage, it mainly supports text data generation. The generated data includes, but is not limited to:
