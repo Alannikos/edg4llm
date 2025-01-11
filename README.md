@@ -133,3 +133,9 @@ MIT License - See [LICENSE](LICENSE) for details.
 ## Acknowledgments
 
 ## Disclaimer
+
+
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Alannikos/edg4llm&type=Date)](https://star-history.com/#Alannikos/edg4llm&Date)
