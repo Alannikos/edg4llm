@@ -29,7 +29,7 @@
 </div>
 
 
-Easy Data Generation For Large Language Model(abbreviated as  EDG4LLM), A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
+**Easy Data Generation For Large Language Model(abbreviated as  EDG4LLM)**, A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
 
 
 ## Latest News
@@ -55,12 +55,12 @@ Easy Data Generation For Large Language Model(abbreviated as  EDG4LLM), A unifie
 - [Star History](#star-history)
 
 ## Introduction
-edg4llm is a Python library designed specifically for generating fine-tuning data using large language models. This tool aims to assist users in creating high-quality training datasets efficiently. At its current stage, it mainly supports text data generation. The generated data includes, but is not limited to:
+**edg4llm** is a Python library designed specifically for generating fine-tuning data using large language models. This tool aims to assist users in creating high-quality training datasets efficiently. At its current stage, it mainly supports text data generation. The generated data includes, but is not limited to:
 - **Question data**
 - **Answer data**
 - **Dialogue data**
 
-With edg4llm, users can easily produce diverse datasets tailored to fine-tuning requirements, significantly enhancing the performance of large language models in specific tasks.
+With **edg4llm**, users can easily produce diverse datasets tailored to fine-tuning requirements, significantly enhancing the performance of large language models in specific tasks.
 ## Features
 EDG4LLM is a unified tool designed to simplify and accelerate the creation of fine-tuning datasets for large language models. With a focus on usability, efficiency, and adaptability, it offers a range of features to meet diverse development needs while ensuring seamless integration and robust debugging support.
 
@@ -83,6 +83,9 @@ pip install edg4llm
 
 ### Supported LLM Provider
 The current version of edg4llm supports the following large language model providers:
+- [**InternLM**](https://github.com/InternLM)
+    - Developer: Developed by the Shanghai Artificial Intelligence Laboratory.
+    - Advantages: InternLM is a series of open-source large language models that offer outstanding reasoning, long-text processing, and tool usage capabilities. 
 
 - [**ChatGLM**](https://github.com/THUDM/)
     - Developer: Jointly developed by Tsinghua University and Zhipu AI.
@@ -93,9 +96,6 @@ The current version of edg4llm supports the following large language model provi
 - [**OpenAI ChatGPT**](https://chatgpt.com/)
     - Developer: Developed by OpenAI.
     - Advantages: OpenAI's ChatGPT is a highly advanced language model known for its robust text generation capabilities. It has been trained on a vast amount of data, allowing it to generate high-quality and contextually relevant responses. 
-- [**InternLM**](https://github.com/InternLM)
-    - Developer: Developed by the Shanghai Artificial Intelligence Laboratory.
-    - Advantages: InternLM is a series of open-source large language models that offer outstanding reasoning, long-text processing, and tool usage capabilities. 
 
 More providers will be added in future updates to extend compatibility and functionality. 
 
@@ -226,8 +226,8 @@ This project has **minimal dependencies**, requiring only the requests library. 
 |---|---|
 | [FunGPT](https://github.com/Alannikos/FunGPT) | An open-source Role-Play project |
 | [InternLM](https://github.com/InternLM/InternLM) | A series of advanced open-source large language models |
-| [DeepSeek](https://github.com/deepseek-ai/) | A powerful and cost-effective open-source large language model, excelling in tasks such as language generation, question answering, and dialog systems. |
 | [ChatGLM](https://github.com/THUDM/) | A bilingual dialog language model based on the General Language Model (GLM) architecture, jointly developed by Tsinghua University and Zhipu AI. |
+| [DeepSeek](https://github.com/deepseek-ai/) | A powerful and cost-effective open-source large language model, excelling in tasks such as language generation, question answering, and dialog systems. |
 | [ChatGPT](https://openai.com/chatgpt/) | A highly advanced language model developed by OpenAI, known for its robust text generation capabilities. |
 
 ## License
