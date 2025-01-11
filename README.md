@@ -29,8 +29,7 @@
 </div>
 
 
-
-Easy Data Generation For Large Language Model, A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
+Easy Data Generation For Large Language Model(abbreviated as  EDG4LLM), A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
 
 
 ## Table of Contents
@@ -56,19 +55,20 @@ Easy Data Generation For Large Language Model, A unified tool to generate fine-t
 </details>
 
 ## Introduction
-$\quad$ edg4llm is a Python library designed specifically for generating fine-tuning data using large language models. This tool aims to assist users in creating high-quality training datasets efficiently. At its current stage, it mainly supports text data generation. The generated data includes, but is not limited to:
+edg4llm is a Python library designed specifically for generating fine-tuning data using large language models. This tool aims to assist users in creating high-quality training datasets efficiently. At its current stage, it mainly supports text data generation. The generated data includes, but is not limited to:
 - **Question data**
 - **Answer data**
 - **Dialogue data**
 
-$\quad$ With edg4llm, users can easily produce diverse datasets tailored to fine-tuning requirements, significantly enhancing the performance of large language models in specific tasks.
+With edg4llm, users can easily produce diverse datasets tailored to fine-tuning requirements, significantly enhancing the performance of large language models in specific tasks.
 ## Features
+EDG4LLM is a unified tool designed to simplify and accelerate the creation of fine-tuning datasets for large language models. With a focus on usability, efficiency, and adaptability, it offers a range of features to meet diverse development needs while ensuring seamless integration and robust debugging support.
 
 1. **Simple to Use**: Provides a straightforward interface that allows users to get started without complex configurations.
 2. **Lightweight**: Minimal dependencies and low resource consumption make it efficient and easy to use.
-3. **High Efficiency**: Utilizes an optimized generation mechanism to quickly produce large volumes of high-quality fine-tuning data.
-4. **Flexibility**: Supports a variety of data formats and generation options, allowing customization to meet specific needs.
-Compatibility: Seamlessly integrates with mainstream large language models and is suitable for various development scenarios.
+3. **Flexibility**: Supports a variety of data formats and generation options, allowing customization to meet specific needs.
+4. **Compatibility**: Seamlessly integrates with mainstream large language models and is suitable for various development scenarios.
+5. **Transparent Debugging**: Provides clear and detailed log outputs, making it easy to debug and trace issues effectively.
 
 ## Installation
 To install **edg4llm**, simply run the following command in your terminal:
@@ -81,13 +81,21 @@ pip install edg4llm
 ### Supported Python Versions
 - **Supported Python Versions**: Python 3.8 or higher is required for compatibility with this library. Ensure your environment meets this version requirement.
 
-### LLM Provider
+### Supported LLM Provider
 The current version of edg4llm supports the following large language model providers:
 
-- **ChatGLM**: A versatile LLM optimized for various text generation tasks.
-- **DeepSeek**: A powerful and efficient LLM for fine-tuned applications.
-- **OpenAI ChatGPT**: The widely-used conversational AI from OpenAI.
-- **InternLM**: A robust LLM tailored for enterprise and advanced use cases.
+- [**ChatGLM**](https://github.com/THUDM/)
+    - Developer: Jointly developed by Tsinghua University and Zhipu AI.
+    - Advantages: ChatGLM is an open-source, bilingual dialog language model based on the General Language Model (GLM) architecture. It has been trained on a large corpus of Chinese and English text, making it highly effective for generating natural and contextually relevant responses.
+- [**DeepSeek**](https://github.com/deepseek-ai/)
+    - Developer: Developed by the DeepSeek team.
+    - Advantages: DeepSeek-V3 is a powerful and cost-effective open-source large language model. It offers top-tier performance, especially in tasks like language generation, question answering, and dialog systems.
+- [**OpenAI ChatGPT**](https://chatgpt.com/)
+    - Developer: Developed by OpenAI.
+    - Advantages: OpenAI's ChatGPT is a highly advanced language model known for its robust text generation capabilities. It has been trained on a vast amount of data, allowing it to generate high-quality and contextually relevant responses. 
+- [**InternLM**](https://github.com/InternLM)
+    - Developer: Developed by the Shanghai Artificial Intelligence Laboratory.
+    - Advantages: InternLM is a series of open-source large language models that offer outstanding reasoning, long-text processing, and tool usage capabilities. 
 
 More providers will be added in future updates to extend compatibility and functionality. 
 
@@ -104,10 +112,13 @@ To get started with **edg4llm**, follow the steps below. This example demonstrat
 ```
 
 2. Ensure you have Python version 3.8 or higher.
+
 3. Obtain the necessary API key and base URL for your chosen model provider (e.g., ChatGLM).
 
-### Code Example
+### Code Example(Chinese Version)
 ```python
+# chatglm_demo.py
+
 import edg4llm
 print(edg4llm.__version__)
 
@@ -142,6 +153,46 @@ data_dialogue = edg.generate(
     num_samples=num_samples
 )
 ```
+### Code Example(English Version)
+```python
+# chatglm_demo.py
+
+import edg4llm
+print(edg4llm.__version__)
+
+from edg4llm import EDG4LLM
+
+api_key = "xxx"
+base_url = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
+
+edg = EDG4LLM(model_provider='chatglm', model_name="glm-4-flash", base_url=base_url, api_key=api_key)
+
+# Set the test data
+system_prompt = """You are a master of ancient Chinese literature, specializing in classical poetry."""
+
+user_prompt = """
+    Goal: 1. Please generate a multi-turn dialogue set in the context of celebrating the Lunar New Year.
+          2. The questions should be diverse.
+          3. The dialogue should align with natural human conversational habits.
+          4. Strictly follow this rule: Please return the generated data in the following format, only in JSON format. JSON template:  
+                [
+                    {{
+                        "input":"AAA","output":"BBB" 
+                    }}
+                ]
+                Where the input field represents a person's dialogue, and the output field represents the expert's response.
+"""
+num_samples = 1  # Generate only one dialogue sample
+
+# Call the generate method to generate the dialogue
+data_dialogue = edg.generate(
+    task_type="dialogue",
+    system_prompt=system_prompt,
+    user_prompt=user_prompt,
+    num_samples=num_samples
+)
+
+```
 
 ### Explanation
 
@@ -160,11 +211,9 @@ Use the generate method with the following parameters:
 5. Output: The generated data is returned as a JSON object in the specified format.
 
 ## Requirements
+This project has **minimal dependencies**, requiring only the requests library. Make sure to have the following version installed:
 
-- Only require requests
-
-## License
-MIT License - See [LICENSE](LICENSE) for details.
+- requests>=2.32.3
 
 ## Future Development Plans
 1. - [ ] Recording Introduction Video
@@ -175,8 +224,11 @@ MIT License - See [LICENSE](LICENSE) for details.
 ## Acknowledgments
 | Project | Description |
 |---|---|
-| [InternLM](https://github.com/InternLM/InternLM) | A series of advanced open-source large language models |
 | [FunGPT](https://github.com/Alannikos/FunGPT) | An open-source Role-Play project |
+| [InternLM](https://github.com/InternLM/InternLM) | A series of advanced open-source large language models |
+| [DeepSeek](https://github.com/deepseek-ai/) | A powerful and cost-effective open-source large language model, excelling in tasks such as language generation, question answering, and dialog systems. |
+| [ChatGLM](https://github.com/THUDM/) | A bilingual dialog language model based on the General Language Model (GLM) architecture, jointly developed by Tsinghua University and Zhipu AI. |
+| [ChatGPT](https://openai.com/chatgpt/) | A highly advanced language model developed by OpenAI, known for its robust text generation capabilities. |
 
 ## License
 MIT License - See [LICENSE](LICENSE) for details.
