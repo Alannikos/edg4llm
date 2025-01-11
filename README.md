@@ -51,7 +51,8 @@
 - [License](#license)
 - [Future Development Plans](#future-development-plans)
 - [Acknowledgments](#acknowledgments)
-- [License](#disclaimer)
+- [License](#license)
+- [Contact us](#contact-me)
 - [Star History](#star-history)
 
 ## Introduction
@@ -98,6 +99,13 @@ The current version of edg4llm supports the following large language model provi
     - Advantages: OpenAI's ChatGPT is a highly advanced language model known for its robust text generation capabilities. It has been trained on a vast amount of data, allowing it to generate high-quality and contextually relevant responses. 
 
 More providers will be added in future updates to extend compatibility and functionality. 
+
+| **Model**         | **Free**         | **Base URL**                                               |
+|--------------------|------------------|------------------------------------------------------------|
+| **InternLM**       | Yes(Partly)              | `https://internlm-chat.intern-ai.org.cn/puyu/api/v1/chat/completions`      |
+| **ChatGLM**        | Yes(Partly)              | `https://open.bigmodel.cn/api/paas/v4/chat/completions/`    |
+| **DeepSeek**       | Yes(Free Trial for New Users)              | `https://api.deepseek.com/chat/completions` |
+| **OpenAI ChatGPT** | No (Paid Plans)  | `https://api.openai.com/v1/chat/completions`                    |
 
 
 ## Quick Start
@@ -232,6 +240,15 @@ This project has **minimal dependencies**, requiring only the requests library. 
 
 ## License
 MIT License - See [LICENSE](LICENSE) for details.
+
+## Contact Me
+Thank you for using **EDG4LLM**! Your support and feedback are invaluable in making this project better.
+
+If you encounter any issues, have suggestions, or simply want to share your thoughts, feel free to:
+- Submit an Issue: Visit the [Issues Page](https://github.com/Alannikos/edg4llm/issues) and describe the problem or suggestion.
+- Email Me: You can also reach out directly via email at alannikos768@outlook.com. I'll do my best to respond promptly.
+
+Your contributions and feedback are greatly appreciated. Thank you for helping improve this tool!
 
 ## Star History
 
