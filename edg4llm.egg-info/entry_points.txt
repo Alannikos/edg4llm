@@ -1,0 +1,2 @@
+[console_scripts]
+edg4llm-cli = edg4llm.utils.list_supported_models:main

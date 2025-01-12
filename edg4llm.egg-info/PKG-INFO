@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: edg4llm
-Version: 1.0.14
+Version: 1.0.16
 Summary: A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
 Home-page: https://github.com/alannikos/edg4llm
 Author: Alannikos
@@ -135,8 +135,39 @@ More providers will be added in future updates to extend compatibility and funct
 
 
 ## Quick Start
+To get started with **edg4llm**, follow the steps below. These examples demonstrate how to use the library to generate dialogue data based on a specific prompt.
 
-To get started with **edg4llm**, follow the steps below. This example demonstrates how to use the library to generate dialogue data based on a specific prompt.
+### **Attention!**
+
+If you want to use `question` mode, please assure that your user_prompt contains the following format:
+
+```json
+[
+    {
+        "question": "AAA"
+    }
+]
+```
+
+If you want to use `answer` mode, please assure that your user_prompt contains the following format:
+
+```json
+[
+    {
+        "answer": "AAA"
+    }
+]
+```
+
+If you want to use `dialogue` mode, please assure that your user_prompt contains the following format:
+
+```json
+[
+    {{
+        "input":"AAA","output":"BBB" 
+    }}
+]
+```
 
 ### Prerequisites
 
@@ -148,6 +179,20 @@ To get started with **edg4llm**, follow the steps below. This example demonstrat
 2. Ensure you have Python version 3.8 or higher.
 
 3. Obtain the necessary API key and base URL for your chosen model provider (e.g., ChatGLM).
+
+4. you can use the CLI to list the supported model_providers and model_names
+
+```
+usage: edg4llm-cli [-h] [--list-providers] [--list-models PROVIDER]
+
+View the list of supported models.
+
+options:
+  -h, --help            show this help message and exit
+  --list-providers      List all supported providers.
+  --list-models PROVIDER
+                        View the list of models for a specific provider.
+```
 
 ### Code Example(Chinese Version)
 ```python
@@ -237,9 +282,12 @@ data_dialogue = edg.generate(
 3. Prompts:
     - system_prompt defines the behavior or role of the assistant.
     - user_prompt provides specific instructions for generating data.
-4. Data Generation:
-Use the generate method with the following parameters:
-    - task_type: Defines the type of task (e.g., dialogue, question-answering).
+4. Data Generation: Use the generate method with the following parameters:
+    - task_type: Defines the type of task.
+        - dialogue: generate the question-answer pairs according to the prompt.
+        - question: generate the question data according to the prompt.
+        - answer: generate the answer data according to the questions and the prompt.
+        
     - system_prompt and user_prompt: Provide context and task-specific instructions.
     - num_samples: Specifies how many samples to generate.
 5. Output: The generated data is returned as a JSON object in the specified format.

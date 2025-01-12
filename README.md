@@ -161,6 +161,20 @@ If you want to use `dialogue` mode, please assure that your user_prompt contains
 
 3. Obtain the necessary API key and base URL for your chosen model provider (e.g., ChatGLM).
 
+4. you can use the CLI to list the supported model_providers and model_names
+
+```
+usage: edg4llm-cli [-h] [--list-providers] [--list-models PROVIDER]
+
+View the list of supported models.
+
+options:
+  -h, --help            show this help message and exit
+  --list-providers      List all supported providers.
+  --list-models PROVIDER
+                        View the list of models for a specific provider.
+```
+
 ### Code Example(Chinese Version)
 ```python
 # chatglm_demo.py

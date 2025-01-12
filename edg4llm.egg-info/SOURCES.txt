@@ -5,6 +5,7 @@ edg4llm/__init__.py
 edg4llm.egg-info/PKG-INFO
 edg4llm.egg-info/SOURCES.txt
 edg4llm.egg-info/dependency_links.txt
+edg4llm.egg-info/entry_points.txt
 edg4llm.egg-info/not-zip-safe
 edg4llm.egg-info/requires.txt
 edg4llm.egg-info/top_level.txt
@@ -31,5 +32,6 @@ edg4llm/utils/__init__.py
 edg4llm/utils/config.py
 edg4llm/utils/data_utils.py
 edg4llm/utils/exceptions.py
+edg4llm/utils/list_supported_models.py
 edg4llm/utils/logger.py
 edg4llm/utils/template.py

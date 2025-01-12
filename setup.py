@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="edg4llm",  # 项目名称
-    version="1.0.14",  # 项目版本
+    version="1.0.16",  # 项目版本
     author="Alannikos",  # 作者姓名
     author_email="alannikos768@outlook.com",  # 作者邮箱
     description="A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.",  # 简短描述
@@ -28,4 +28,9 @@ setup(
     include_package_data=True,  # 包含非代码文件，如配置文件
     zip_safe=False,  # 是否以 zip 格式分发（通常为 False）
     keywords="LLM fine-tuning data-generation AI NLP",  # 关键词
+    entry_points={
+        "console_scripts": [
+            "edg4llm-cli=edg4llm.utils.list_supported_models:main"
+        ]
+    },
 )
