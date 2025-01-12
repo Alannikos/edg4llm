@@ -116,8 +116,39 @@ More providers will be added in future updates to extend compatibility and funct
 
 
 ## Quick Start
+To get started with **edg4llm**, follow the steps below. These examples demonstrate how to use the library to generate dialogue data based on a specific prompt.
 
-To get started with **edg4llm**, follow the steps below. This example demonstrates how to use the library to generate dialogue data based on a specific prompt.
+### **Attention!**
+
+If you want to use `question` mode, please assure that your user_prompt contains the following format:
+
+```json
+[
+    {
+        "question": "AAA"
+    }
+]
+```
+
+If you want to use `answer` mode, please assure that your user_prompt contains the following format:
+
+```json
+[
+    {
+        "answer": "AAA"
+    }
+]
+```
+
+If you want to use `dialogue` mode, please assure that your user_prompt contains the following format:
+
+```json
+[
+    {{
+        "input":"AAA","output":"BBB" 
+    }}
+]
+```
 
 ### Prerequisites
 
