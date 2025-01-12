@@ -107,12 +107,12 @@ The current version of edg4llm supports the following large language model provi
 
 More providers will be added in future updates to extend compatibility and functionality. 
 
-| **Model**         | **Free**         | **Base URL**                                               |
-|--------------------|------------------|------------------------------------------------------------|
-| **InternLM**       | Yes(Partly)              | `https://internlm-chat.intern-ai.org.cn/puyu/api/v1/chat/completions`      |
-| **ChatGLM**        | Yes(Partly)              | `https://open.bigmodel.cn/api/paas/v4/chat/completions/`    |
-| **DeepSeek**       | Yes(Free Trial for New Users)              | `https://api.deepseek.com/chat/completions` |
-| **OpenAI ChatGPT** | No (Paid Plans)  | `https://api.openai.com/v1/chat/completions`                    |
+| **Model**         | **Free**         | **Base URL**                                               | **Model Provider** |
+|--------------------|------------------|------------------------------------------------------------|--------------------|
+| **InternLM**       | Yes(Partly)       | `https://internlm-chat.intern-ai.org.cn/puyu/api/v1/chat/completions` | `internlm` |
+| **ChatGLM**        | Yes(Partly)       | `https://open.bigmodel.cn/api/paas/v4/chat/completions/`   | `chatglm`  |
+| **DeepSeek**       | Yes(Free Trial for New Users) | `https://api.deepseek.com/chat/completions` | `deepseek` |
+| **OpenAI ChatGPT** | No (Paid Plans)   | `https://api.openai.com/v1/chat/completions`               | `chatgpt`   |
 
 
 ## Quick Start
