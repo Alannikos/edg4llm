@@ -60,7 +60,7 @@
 - [Future Development Plans](#future-development-plans)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
-- [Contact us](#contact-me)
+- [Contact me](#contact-me)
 - [Star History](#star-history)
 
 ## Introduction
@@ -284,6 +284,7 @@ This project has **minimal dependencies**, requiring only the requests library. 
 2. - [ ] Support Gemini2
 3. - [ ] Support local large language models
 4. - [ ] Support other types of data, such as picture.
+5. - [ ] preprocess the base_url and api_key
 
 ## Acknowledgments
 | Project | Description |
