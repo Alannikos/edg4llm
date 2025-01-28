@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: edg4llm
-Version: 1.0.16
+Version: 1.0.17
 Summary: A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.
 Home-page: https://github.com/alannikos/edg4llm
 Author: Alannikos
@@ -21,13 +21,13 @@ Requires-Dist: requests>=2.32.3
 
 <div align="center">
 
-<!-- ![welcome](assets/welcome.png) -->
-```
+![welcome](assets/welcome.png)
+<!-- ```
       __      __  __        __   ___  __     __  __   __                     
 |  | |_  |   /   /  \ |\/| |_     |  /  \   |_  |  \ / _   |__| |   |   |\/| 
 |/\| |__ |__ \__ \__/ |  | |__    |  \__/   |__ |__/ \__)     | |__ |__ |  | 
                                                                              
-```
+``` -->
 
 
 </div>
@@ -63,6 +63,8 @@ Requires-Dist: requests>=2.32.3
 <details open>
 <summary><b>2025</b></summary>
 
+- [2025/01/28] 🚀🎉 We've added support for **DeepSeek-R1** and **InternLM3** models! Stay tuned for more updates!
+- [2025/01/12] 📢📺 We've released a project introduction video! You can find the video on [Bilibili](https://www.bilibili.com/video/BV1MccVeyEHp/). If you like it, don't forget to give it a thumbs up 👍 and follow us!
 - [2025/01/11] 👋👋 We are excited to announce [**the initial release of edg4llm v1.0.12**](https://pypi.org/project/edg4llm/1.0.12/), marking the completion of its core functionalities. 
 
 </details>
@@ -78,7 +80,7 @@ Requires-Dist: requests>=2.32.3
 - [Future Development Plans](#future-development-plans)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
-- [Contact us](#contact-me)
+- [Contact me](#contact-me)
 - [Star History](#star-history)
 
 ## Introduction
@@ -126,12 +128,12 @@ The current version of edg4llm supports the following large language model provi
 
 More providers will be added in future updates to extend compatibility and functionality. 
 
-| **Model**         | **Free**         | **Base URL**                                               |
-|--------------------|------------------|------------------------------------------------------------|
-| **InternLM**       | Yes(Partly)              | `https://internlm-chat.intern-ai.org.cn/puyu/api/v1/chat/completions`      |
-| **ChatGLM**        | Yes(Partly)              | `https://open.bigmodel.cn/api/paas/v4/chat/completions/`    |
-| **DeepSeek**       | Yes(Free Trial for New Users)              | `https://api.deepseek.com/chat/completions` |
-| **OpenAI ChatGPT** | No (Paid Plans)  | `https://api.openai.com/v1/chat/completions`                    |
+| **Model**         | **Free**         | **Base URL**                                               | **Model Provider** |
+|--------------------|------------------|------------------------------------------------------------|--------------------|
+| **InternLM**       | Yes(Partly)       | `https://internlm-chat.intern-ai.org.cn/puyu/api/v1/chat/completions` | `internlm` |
+| **ChatGLM**        | Yes(Partly)       | `https://open.bigmodel.cn/api/paas/v4/chat/completions/`   | `chatglm`  |
+| **DeepSeek**       | Yes(Free Trial for New Users) | `https://api.deepseek.com/chat/completions` | `deepseek` |
+| **OpenAI ChatGPT** | No (Paid Plans)   | `https://api.openai.com/v1/chat/completions`               | `chatgpt`   |
 
 
 ## Quick Start
@@ -302,6 +304,7 @@ This project has **minimal dependencies**, requiring only the requests library. 
 2. - [ ] Support Gemini2
 3. - [ ] Support local large language models
 4. - [ ] Support other types of data, such as picture.
+5. - [ ] preprocess the base_url and api_key
 
 ## Acknowledgments
 | Project | Description |

@@ -23,8 +23,8 @@ class ModelManager:
         """
         self.supported_models = {
             "ChatGLM": ["glm-4-plus", "glm-4-0520", "glm-4-air", "glm-4-airx", "glm-4-long", "glm-4-flashx", "glm-4-flash"],
-            "DeepSeek": ["deepseek-chat"],
-            "InternLM": ["internlm2.5-latest"],
+            "DeepSeek": ["deepseek-chat", "deepseek-reasoner"],
+            "InternLM": ["internlm2.5-latest", "internlm3-latest"],
             "ChatGPT": ["gpt-3.5-turbo-16k", "gpt-3.5-turbo-1106", "gpt-3.5-turbo-0125", "gpt-3.5-turbo", "gpt-4o-mini", "gpt-4o-mini-2024-07-18", "o1-mini", "o1-mini-2024-09-12", "o1-preview","o1-preview-2024-09-12"]
         }
 
@@ -37,6 +37,7 @@ class ModelManager:
         list
             A list of provider names.
         """
+
         return list(self.supported_models.keys())
 
     def list_models_by_provider(self, provider_name):
