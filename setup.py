@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="edg4llm",  # 项目名称
-    version="1.0.17",  # 项目版本
+    version="1.0.18",  # 项目版本
     author="Alannikos",  # 作者姓名
     author_email="alannikos768@outlook.com",  # 作者邮箱
     description="A unified tool to generate fine-tuning datasets for LLMs, including questions, answers, and dialogues.",  # 简短描述
