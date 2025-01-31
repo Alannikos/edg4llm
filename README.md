@@ -31,7 +31,7 @@
 [![Discord](https://img.shields.io/discord/1327445853388144681?style=flat&logo=discord)](https://discord.com/channels/1327445853388144681/)
 [![Bilibili](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.bilibili.com%2Fx%2Frelation%2Fstat%3Fvmid%3D3494365446015137&query=%24.data.follower&style=flat&logo=bilibili&label=followers&color=%23FF69B4)](https://space.bilibili.com/3494365446015137)
 [![PyPI - Version](https://img.shields.io/pypi/v/edg4llm?style=flat&logo=pypi&logoColor=blue&color=red)](https://pypi.org/project/edg4llm/)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/edg4llm?color=blue&logo=pypi&logoColor=gold)](https://pypi.org/project/edg4llm/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/edg4llm?color=blue&logo=pypi&logoColor=gold)](https://pypistats.org/packages/edg4llm)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/edg4llm?logo=python&logoColor=gold)](https://pypi.org/project/edg4llm/)
 </div>
 
