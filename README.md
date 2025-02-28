@@ -57,7 +57,6 @@
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [Requirements](#requirements)
-- [License](#license)
 - [Future Development Plans](#future-development-plans)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
