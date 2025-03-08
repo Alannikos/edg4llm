@@ -280,7 +280,7 @@ This project has **minimal dependencies**, requiring only the requests library. 
 - requests>=2.32.3
 
 ## Future Development Plans
-1. - [ ] Recording Introduction Video
+1. - [×] Recording Introduction Video
 2. - [ ] Support Gemini2
 3. - [ ] Support local large language models
 4. - [ ] Support other types of data, such as picture.
