@@ -44,7 +44,7 @@
 <details open>
 <summary><b>2025</b></summary>
 
-- [2025/01/28] 🚀🎉 We've added support for **DeepSeek-R1** and **InternLM3** models: [**the release of edg4llm v1.0.18**](https://pypi.org/project/edg4llm/1.0.18/). Stay tuned for more updates!
+- [2025/01/28] 🚀🎉 We've added support for **DeepSeek-R1** and **InternLM3** models: the release of edg4llm [**v1.0.18**](https://pypi.org/project/edg4llm/1.0.18/). Stay tuned for more updates!
 - [2025/01/12] 📢📺 We've released a project introduction video! You can find the video on [Bilibili](https://www.bilibili.com/video/BV1MccVeyEHp/). If you like it, don't forget to give it a thumbs up 👍 and follow us!
 - [2025/01/11] 👋👋 We are excited to announce [**the initial release of edg4llm v1.0.12**](https://pypi.org/project/edg4llm/1.0.12/), marking the completion of its core functionalities. 
 
