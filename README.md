@@ -15,9 +15,9 @@
 
 <div align="center">
 
-[📘Documentation](https://github.com/Alannikos/FunGPT) |
-[🛠️Quick Start](https://github.com/Alannikos/FunGPT) |
-[🤔Reporting Issues](https://github.com/Alannikos/FunGPT/issues) 
+[📘Documentation](https://github.com/alannikos/edg4llm) |
+[🛠️Quick Start](https://github.com/alannikos/edg4llm) |
+[🤔Reporting Issues](https://github.com/alannikos/edg4llm/issues) 
 
 </div>
 
