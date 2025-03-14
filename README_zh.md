@@ -286,11 +286,12 @@ data_dialogue = edg.generate(
 - requests>=2.32.3
 
 ## 未来开发计划
-1. - [ × ] 录制介绍视频
-2. - [ ] 支持 Gemini2
-3. - [ ] 支持本地大型语言模型
-4. - [ ] 支持其他类型的数据，例如图片
-5. - [ ] 预处理 base_url 和 api_key
+
+- [x] 录制介绍视频  
+- [ ] 支持 Gemini2  
+- [ ] 支持本地大型语言模型  
+- [ ] 支持其他类型的数据，例如图片  
+- [ ] 预处理 `base_url` 和 `api_key`
 
 ## 致谢
 | Project | Description |
